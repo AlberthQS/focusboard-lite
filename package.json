@@ -1,0 +1,10 @@
+{
+  "name": "focusboard-lite",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A small task manager with local browser storage, filters and tests.",
+  "scripts": {
+    "test": "node --test"
+  }
+}
