@@ -7,18 +7,14 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: "github-pages"
   cancel-in-progress: false
 
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  preparar:
+    name: Preparar sitio
     runs-on: ubuntu-latest
     steps:
       - name: Descargar archivos
@@ -31,10 +27,26 @@ jobs:
         run: |
           mkdir -p site-dist
           cp index.html styles.css app.js core.mjs site-dist/
-      - name: Subir archivos del sitio
+          test -s site-dist/index.html
+      - name: Subir sitio como artefacto Pages
         uses: actions/upload-pages-artifact@v4
         with:
           path: site-dist
-      - name: Publicar en GitHub Pages
+
+  publicar:
+    name: Publicar en GitHub Pages
+    needs: preparar
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Dar tiempo a la disponibilidad del artefacto
+        run: sleep 20
+      - name: Publicar sitio
         id: deployment
         uses: actions/deploy-pages@v4
