@@ -1,44 +1,62 @@
 # FocusBoard Lite
 
-A small, accessible task manager built with **HTML, CSS and JavaScript**. A practical learning project that works without an account, database, or external service.
+Una aplicación sencilla para organizar tareas personales desde el navegador, sin crear una cuenta. La construí como proyecto de práctica con **HTML, CSS y JavaScript**.
 
-## Features
+## Qué permite hacer
 
-- Create tasks with priority (low, medium, high)
-- Mark tasks as completed and remove individual tasks
-- Search and filter pending or completed tasks
-- Automatically save data locally in the browser when storage is available
-- No external dependencies and no data sent to a server
-- Pure-function tests using the built-in Node.js test runner
+- Crear tareas y asignarles prioridad baja, media o alta.
+- Marcar tareas como completadas y eliminarlas.
+- Filtrar entre todas, pendientes y completadas.
+- Buscar tareas por texto.
+- Conservar las tareas en el almacenamiento local del navegador cuando está disponible.
+- Navegar con teclado y utilizar etiquetas accesibles en los controles principales.
 
-## Run locally
+Los datos **no se envían a un servidor**. Si borras los datos del navegador o utilizas otro dispositivo, tus tareas no se sincronizarán.
 
-Because the app imports an ES module, serve the folder using a small local server:
+## Tecnologías
+
+HTML · CSS · JavaScript (módulos ES) · `localStorage` · Node.js para pruebas.
+
+No necesita framework ni dependencias de producción.
+
+## Cómo ejecutarlo
+
+Puedes clonar este repositorio y levantar un servidor local desde la carpeta del proyecto:
 
 ```bash
+git clone https://github.com/AlberthQS/focusboard-lite.git
+cd focusboard-lite
 python -m http.server 8000
 ```
 
-Open `http://localhost:8000`.
+Abre `http://localhost:8000` en el navegador. Si usas Windows y `python` no funciona, prueba `py -m http.server 8000`.
 
-## Tests
+## Pruebas
 
-Requires a recent Node.js version with the built-in test runner (Node.js 18+):
+Las funciones principales están separadas en `core.mjs` y tienen pruebas automatizadas en `tests/core.test.mjs`. Con Node.js 18 o posterior:
 
 ```bash
 npm test
 ```
 
-## Publish with GitHub Pages
+Las pruebas cubren creación, validación, cambio de estado, eliminación, filtrado y conteo de tareas. También se ejecutan en GitHub Actions cuando se configura el flujo de integración continua.
 
-In **Settings → Pages**, choose **Deploy from a branch**, `main`, `/ (root)`.
+## Estructura
 
-The website URL will be `https://alberthqs.github.io/focusboard-lite/` after publication (not before).
+| Archivo | Para qué sirve |
+| --- | --- |
+| `index.html` | Estructura e interfaz de la aplicación |
+| `styles.css` | Diseño y adaptación a pantallas |
+| `app.js` | Eventos, interfaz y persistencia |
+| `core.mjs` | Lógica reutilizable y validaciones |
+| `tests/core.test.mjs` | Pruebas de lógica con Node.js |
 
-## Privacy
+## Publicación
 
-Tasks stay in the user's own browser storage; clearing browser storage deletes them. No passwords or personal data are required.
+El repositorio incluye un flujo para GitHub Pages. Para habilitarlo, entra en **Settings → Pages** y configura GitHub Actions como origen. Una vez publicado, el enlace esperado será `https://alberthqs.github.io/focusboard-lite/`.
 
-## Learning note
+## Límites actuales
 
-This project was prepared with AI assistance as an educational example. Review and customize its code as you learn.
+FocusBoard Lite es un proyecto de aprendizaje: no tiene cuentas, sincronización entre dispositivos, backend ni recordatorios. Su objetivo es funcionar de forma simple y mantener el código fácil de entender.
+
+[Volver a mi perfil de GitHub](https://github.com/AlberthQS)
