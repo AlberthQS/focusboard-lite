@@ -27,10 +27,14 @@ jobs:
         uses: actions/configure-pages@v5
         with:
           enablement: true
-      - name: Preparar sitio estatico
+      - name: Preparar archivos publicos
+        run: |
+          mkdir -p site-dist
+          cp index.html styles.css app.js core.mjs site-dist/
+      - name: Subir archivos del sitio
         uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: site-dist
       - name: Publicar en GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
